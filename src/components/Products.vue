@@ -1,9 +1,9 @@
 <script setup>
 import { computed, inject } from "vue";
-import { useCart } from "../composables/useCart";
+import { useCartStore } from "../store/cart";
 import { AddToCartIcon, RemoveFromCartIcon } from "./Icons";
 
-const { cart, addToCart, removeFromCart } = useCart();
+const cartStore = useCartStore();
 
 const { filteredProducts } = inject("filters");
 
@@ -15,7 +15,7 @@ const productsMapped = computed(() => {
 });
 
 const checkProductInCart = (product) => {
-  return cart.value.some((item) => item.id === product.id);
+  return cartStore.cart.some((item) => item.id === product.id);
 };
 </script>
 
@@ -34,7 +34,9 @@ const checkProductInCart = (product) => {
             }"
             @click="
               () => {
-                product.inCart ? removeFromCart(product) : addToCart(product);
+                product.inCart
+                  ? cartStore.removeFromCart(product)
+                  : cartStore.addToCart(product);
               }
             "
           >

@@ -1,8 +1,8 @@
 <script setup>
 import { ClearCartIcon, CartIcon } from "./Icons";
-import { useCart } from "../composables/useCart";
+import { useCartStore } from "../store/cart";
 
-const { cart, clearCart, addToCart } = useCart();
+const cartStore = useCartStore();
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const { cart, clearCart, addToCart } = useCart();
 
   <aside class="cart">
     <ul>
-      <li v-for="product in cart" :key="product.id">
+      <li v-for="product in cartStore.cart" :key="product.id">
         <img :src="product.thumbnail" :alt="product.title" />
         <div>
           <strong>{{ product.title }}</strong> - ${{ product.price }}
@@ -21,12 +21,12 @@ const { cart, clearCart, addToCart } = useCart();
 
         <footer>
           <small> Qty: {{ product.quantity }} </small>
-          <button @click="() => addToCart(product)">+</button>
+          <button @click="() => cartStore.addToCart(product)">+</button>
         </footer>
       </li>
     </ul>
 
-    <button @click="clearCart">
+    <button @click="cartStore.clearCart">
       <ClearCartIcon />
     </button>
   </aside>
