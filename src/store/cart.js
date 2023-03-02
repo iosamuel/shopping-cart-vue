@@ -5,7 +5,6 @@ function updateLocalStorage(cart) {
   window.localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-/* 
 // Using Composition API
 export const useCartStore = defineStore("cart", () => {
   const cart = ref(JSON.parse(window.localStorage.getItem("cart")) || []);
@@ -38,10 +37,9 @@ export const useCartStore = defineStore("cart", () => {
 
   return { cart, addToCart, removeFromCart, clearCart };
 });
-*/
 
 // Using Options API
-export const useCartStore = defineStore("cart", {
+/* export const useCartStore = defineStore("cart", {
   state: () => ({
     cart: JSON.parse(window.localStorage.getItem("cart")) || [],
   }),
@@ -70,4 +68,4 @@ export const useCartStore = defineStore("cart", {
       updateLocalStorage([]);
     },
   },
-});
+}); */
